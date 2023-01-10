@@ -33,3 +33,22 @@ function duplicateCount(text) {
 			.match(/([^])\1+/g) || []
 	).length;
 }
+
+// Решение через хэш-объект
+function duplicateCount(text) {
+	const hash = {
+		getDuplicateCount() {
+			return Object.values(this).filter((count) => count > 1).length;
+		},
+	};
+
+	for (let char of text.toLowerCase()) {
+		if (hash[char]) {
+			hash[char] += 1;
+			continue;
+		}
+		hash[char] = 1;
+	}
+
+	return hash.getDuplicateCount();
+}
