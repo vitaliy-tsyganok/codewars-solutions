@@ -34,7 +34,7 @@ function duplicateCount(text) {
 	).length;
 }
 
-// Решение через хэш-объект
+// Решение через хэш-объект №1
 function duplicateCount(text) {
 	const hash = {
 		getDuplicateCount() {
@@ -51,4 +51,27 @@ function duplicateCount(text) {
 	}
 
 	return hash.getDuplicateCount();
+}
+
+// Решение через хэш-объект №2
+function duplicateCount(str) {
+	const originalStr = str.toLowerCase().split('');
+
+	const result = {
+		duplicateCount: 0,
+	};
+
+	originalStr.forEach((char) => {
+		if (!Object.hasOwn(result, char)) {
+			result[char] = 1;
+			return;
+		}
+		if (result[char] === 1) {
+			result[char] += 1;
+			result.duplicateCount += 1;
+			return;
+		}
+	});
+
+	return result.duplicateCount;
 }
